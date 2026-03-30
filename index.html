@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>污点修复 — Image Flaw Broom</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- ====== 顶部工具栏 ====== -->
+    <header id="toolbar">
+      <div class="toolbar-group">
+        <label class="btn btn-upload" title="打开图片">
+          📂 打开图片
+          <input type="file" id="file-input" accept="image/*" hidden>
+        </label>
+        <button id="btn-save" class="btn" title="保存结果" disabled>💾 保存</button>
+      </div>
+
+      <div class="toolbar-group">
+        <label class="toolbar-label">画笔大小</label>
+        <input type="range" id="brush-size" min="2" max="60" value="15">
+        <span id="brush-size-val">15</span>
+      </div>
+
+      <div class="toolbar-group">
+        <label class="toolbar-label">算法</label>
+        <select id="algo-select">
+          <option value="auto">Auto (Quality)</option>
+          <option value="telea">Telea</option>
+          <option value="ns">Navier-Stokes</option>
+        </select>
+      </div>
+
+      <div class="toolbar-group">
+        <button id="btn-inpaint" class="btn btn-primary" disabled>🩹 修复</button>
+        <button id="btn-clear-mask" class="btn" disabled>🧹 清除蒙版</button>
+        <button id="btn-undo" class="btn" disabled>↩ 撤销</button>
+      </div>
+    </header>
+
+    <!-- ====== 画布区域 ====== -->
+    <main id="canvas-area">
+      <!-- 提示：未加载图片时显示 -->
+      <div id="placeholder">
+        <p>将图片拖放到此处，或点击「打开图片」</p>
+      </div>
+      <div id="canvas-wrapper" class="hidden">
+        <!-- 主画布：显示图像 -->
+        <canvas id="canvas-main"></canvas>
+        <!-- 蒙版画布：叠加在主画布上方，用于涂抹标记 -->
+        <canvas id="canvas-mask"></canvas>
+      </div>
+    </main>
+
+    <!-- ====== 进度条 ====== -->
+    <div id="progress-bar-wrap" class="hidden">
+      <div id="progress-bar-fill"></div>
+      <span id="progress-bar-label"></span>
+    </div>
+
+    <!-- ====== 状态栏 ====== -->
+    <footer id="statusbar">
+      <span id="status-text">就绪 — 请加载图片</span>
+      <span id="status-dims"></span>
+    </footer>
+  </div>
+
+  <!-- OpenCV.js from CDN (Wasm build) -->
+  <script
+    id="opencv-script"
+    async
+    src="https://docs.opencv.org/4.9.0/opencv.js"
+  ></script>
+  <script src="app.js"></script>
+</body>
+</html>
