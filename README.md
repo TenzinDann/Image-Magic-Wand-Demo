@@ -5,7 +5,7 @@
 
 ## 正式版网站
 
-Live Website: [https://tenzindann.github.io/image-magic-wand/](https://tenzindann.github.io/image-magic-wand/)
+Live Website: [https://tenzindann.com/image-magic-wand/](https://tenzindann.com/image-magic-wand/)
 
 ## 功能特性
 
